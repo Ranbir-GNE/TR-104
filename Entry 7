@@ -1,0 +1,76 @@
+Date: 1st August 2024
+
+Topics Covered:
+1. Single-Threaded vs Multi-Threaded Programming Languages
+
+    Single-Threaded Programming:
+        Definition:
+            A single-threaded environment executes one task at a time, processing each operation in sequence.
+            JavaScript is a single-threaded language, which means it processes code one line at a time.
+        How It Works:
+            In a single-threaded system, tasks are placed in a queue (the event queue), and the event loop processes them in order.
+            If a task is blocking (e.g., a long-running computation), it can delay the execution of other tasks.
+        Use Case:
+            Ideal for environments where operations are quick and asynchronous tasks like handling user input or DOM events are prioritized.
+        Example:
+            JavaScript in web browsers is single-threaded, and asynchronous operations (e.g., setTimeout(), AJAX) allow the browser to handle multiple tasks without blocking the UI.
+
+    Multi-Threaded Programming:
+        Definition:
+            Multi-threaded environments can execute multiple tasks concurrently using multiple threads. Each thread runs its own task independently.
+        How It Works:
+            Tasks can run in parallel, which helps improve the performance of programs that require concurrent operations (e.g., server-side processes, complex calculations).
+            Multi-threading can be managed by the operating system or through dedicated libraries (e.g., Web Workers in JavaScript, pthreads in C).
+        Use Case:
+            Used in applications requiring intensive computations or where multiple tasks need to be processed simultaneously (e.g., video rendering, real-time applications).
+        Example:
+            Java applications and web servers like Node.js can be multi-threaded, allowing them to handle multiple requests at once.
+
+2. Event Queue and Event Loop (in Single-Threaded Context)
+
+    Event Queue:
+        The event queue is a structure that holds events or tasks that need to be processed. In single-threaded environments, events are processed in the order they arrive, but they can be delayed if the thread is occupied with a long-running task.
+        JavaScript's event queue handles tasks such as callbacks from asynchronous operations.
+        Example:
+
+        console.log('Start');
+        setTimeout(() => console.log('This is delayed'), 2000);
+        console.log('End');
+        // Output: Start, End, This is delayed
+
+    Event Loop:
+        The event loop is responsible for managing the event queue and executing tasks from it. It checks if the call stack is empty, and if so, it picks tasks from the event queue and processes them.
+        In JavaScript, the event loop ensures that the UI remains responsive by handling asynchronous code execution.
+
+3. Differences Between Single-Threaded and Multi-Threaded Programming
+
+    Execution Model:
+        Single-Threaded: Executes tasks one at a time, using an event loop to manage asynchronous operations.
+        Multi-Threaded: Executes multiple tasks in parallel using multiple threads, allowing for true concurrent execution.
+
+    Concurrency Handling:
+        Single-Threaded: Concurrency is handled by asynchronous methods (e.g., setTimeout(), Promises, async/await) that let tasks run without blocking the thread.
+        Multi-Threaded: Handles concurrency natively by utilizing multiple threads, where each thread can run a separate task simultaneously.
+
+    Performance:
+        Single-Threaded: Can be slower in cases of CPU-intensive tasks, as it cannot process multiple tasks in parallel.
+        Multi-Threaded: Can improve performance for applications that require heavy processing or multiple simultaneous tasks.
+
+4. Use Cases
+
+    Single-Threaded Programming:
+        Web development with JavaScript (e.g., handling user events, managing UI updates).
+        Real-time applications that need to handle many short tasks asynchronously (e.g., chat applications, interactive forms).
+        Mobile app frontends that interact with a central server.
+    Multi-Threaded Programming:
+        Data processing applications that need to perform calculations concurrently (e.g., scientific simulations, video rendering).
+        Server-side applications that handle multiple client requests simultaneously (e.g., web servers, real-time collaborative tools).
+        Complex games and applications that require high-performance concurrent tasks.
+
+Resources:
+
+    Understanding Event Loop and Single-Threaded Nature in JavaScript: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Event_loop
+    Threading in Programming Languages
+    Single vs Multi-threaded in Programming: https://medium.com/design-bootcamp/single-and-multi-threaded-programming-languages-benefits-and-specificity-explained-%EF%B8%8F-37807f4bad0#:~:text=In%20a%20single%2Dthreaded%20programming%20language%2C%20the%20execution,flow%20of%20control%20within%20the%20same%20process.
+
+Today’s session gave a solid understanding of the differences between single-threaded and multi-threaded programming, along with the mechanisms in JavaScript that support efficient handling of asynchronous operations. The event loop and event queue concepts are crucial for building responsive web applications.
