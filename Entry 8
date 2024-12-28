@@ -139,6 +139,6 @@ Resources:
 
     React Hooks: useState
     React Hooks: useRef
-    MDN Web Docs on Refs
+    MDN Web Docs on Refs :https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement
 
 The session provided a comprehensive overview of hooks, particularly useState and useRef, focusing on their practical use cases. Implementing the useRef hook for controlling music playback was a valuable hands-on exercise in understanding how to manage DOM elements without causing unnecessary re-renders.
