@@ -1,0 +1,93 @@
+Topics Covered:
+1. CSS Exercise: Using Flexbox Froggy
+
+    Objective:
+        Learn and practice Flexbox layout concepts interactively using the Flexbox Froggy game.
+    Key Concepts Practiced:
+        Flex container properties:
+            justify-content: Aligns items horizontally (e.g., flex-start, center, space-between).
+            align-items: Aligns items vertically within the container.
+            flex-direction: Specifies the direction of the main axis (e.g., row, column).
+        Flex item properties:
+            align-self: Aligns individual items along the cross-axis.
+            order: Changes the visual order of items.
+            flex: Defines the flexibility of items (e.g., flex-grow, flex-shrink, flex-basis).
+    Experience:
+        The game helped reinforce Flexbox concepts with hands-on challenges, gradually increasing in difficulty.
+
+Resource:
+
+    Flexbox Froggy
+
+2. CSS vs SCSS
+
+CSS (Cascading Style Sheets) and SCSS (Sassy CSS) are both used for styling web applications. However, SCSS extends CSS with additional features for improved developer experience.
+
+Key Differences:
+Feature	CSS	SCSS
+Syntax	Simple, flat structure	Nested and more structured
+Variables	Not supported (in traditional CSS)	Supported using $variableName
+Nesting	Not available	Allows nesting of selectors
+Mixins	Not available	Supports reusable code blocks
+Inheritance	Limited	Supports @extend for inheritance
+Functions	Not supported	Predefined and custom functions
+3. Advantages and Disadvantages of CSS vs SCSS
+
+CSS:
+
+    Advantages:
+        Easy to learn and use.
+        Supported directly by all browsers.
+        Simple for small projects.
+    Disadvantages:
+        Limited functionality (no variables, nesting, or reusable components).
+        Can become repetitive and difficult to manage in large projects.
+
+SCSS:
+
+    Advantages:
+        Enables cleaner and more organized code through features like variables and nesting.
+        Promotes code reusability with mixins and functions.
+        Easier maintenance for large projects.
+    Disadvantages:
+        Requires a preprocessor to compile SCSS into CSS.
+        Adds a layer of complexity to the workflow.
+
+Examples:
+
+    CSS:
+
+.header {
+  color: blue;
+  font-size: 20px;
+}
+.header-title {
+  color: red;
+}
+
+SCSS:
+
+    $primary-color: blue;
+    $secondary-color: red;
+
+    .header {
+      color: $primary-color;
+      font-size: 20px;
+
+      .header-title {
+        color: $secondary-color;
+      }
+    }
+
+Use Cases:
+
+    Use CSS for small, straightforward projects or where SCSS processing is not feasible.
+    Use SCSS for larger projects where code organization, reusability, and maintainability are crucial.
+
+Resources:
+
+    Flexbox Froggy: https://flexboxfroggy.com/
+    SCSS Documentation: https://sass-lang.com/guide/
+    MDN: CSS Overview: https://developer.mozilla.org/en-US/docs/Web/CSS
+
+The session reinforced Flexbox principles interactively and highlighted the enhanced capabilities SCSS offers over traditional CSS, emphasizing when and how to use each for efficient styling.
