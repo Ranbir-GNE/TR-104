@@ -1,0 +1,100 @@
+Date: 31st July 2024
+
+Topics Covered:
+1. Parameters and Arguments in Functions
+
+    Parameters:
+        Variables defined in the function signature that accept values when the function is called.
+        Example:
+
+    function greet(name) {
+        return `Hello, ${name}!`;
+    }
+
+    In this case, name is a parameter.
+
+Arguments:
+
+    The actual values passed to the function when it is called.
+    Example:
+
+        greet('John'); // 'John' is an argument
+
+2. Time-Related Functions
+
+    setTimeout()
+        Executes a function or piece of code after a specified delay (in milliseconds).
+        Syntax:
+
+setTimeout(callback, delay);
+
+Use Case:
+
+    To execute a function after a delay (e.g., show a popup message after 3 seconds).
+
+Example:
+
+    setTimeout(() => console.log("This message appears after 2 seconds"), 2000);
+
+setInterval()
+
+    Executes a function or code repeatedly at specified intervals (in milliseconds).
+    Syntax:
+
+setInterval(callback, interval);
+
+Use Case:
+
+    To execute tasks at regular intervals, such as updating a clock every second.
+
+Example:
+
+    setInterval(() => console.log("This message appears every 3 seconds"), 3000);
+
+clearTimeout()
+
+    Cancels the execution of a function scheduled with setTimeout().
+    Syntax:
+
+clearTimeout(timeoutId);
+
+Use Case:
+
+    To stop a function from executing after a delay, useful for clearing unwanted timeouts.
+
+Example:
+
+    const timeoutId = setTimeout(() => console.log("This won't run"), 2000);
+    clearTimeout(timeoutId); // Cancels the timeout
+
+clearInterval()
+
+    Cancels the repeated execution of a function scheduled with setInterval().
+    Syntax:
+
+clearInterval(intervalId);
+
+Use Case:
+
+    To stop the periodic execution of a function, such as stopping an animation or timer.
+
+Example:
+
+        const intervalId = setInterval(() => console.log("This won't run"), 3000);
+        clearInterval(intervalId); // Stops the interval
+
+3. Why Time-Related Functions Are Not Included in JavaScript
+
+    Explanation:
+        Functions like setTimeout(), setInterval(), clearTimeout(), and clearInterval() are not part of the core JavaScript language (ECMAScript specification).
+        These functions are included as part of the Web API provided by web browsers, allowing interaction with the environment in which JavaScript runs.
+        JavaScript itself is designed to be platform-agnostic, so the time-related functions are added by the browser's runtime, which has control over asynchronous operations, timers, and event loops.
+
+Resources:
+
+    JavaScript Functions - Parameters and Arguments: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions#parameters_and_arguments
+    setTimeout() and setInterval() :https://developer.mozilla.org/en-US/docs/Web/API/Window/setTimeout
+    clearTimeout() and clearInterval()
+    Understanding the Event Loop: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Event_loop
+
+The session deepened my understanding of how JavaScript interacts with the runtime environment, especially with time-related functions and their practical applications in managing delays and intervals.
