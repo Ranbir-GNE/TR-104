@@ -1,0 +1,61 @@
+Date: 30th July 2024
+
+Topics Covered:
+1. Introduction to Functions
+
+    Definition:
+        Functions are reusable blocks of code designed to perform a specific task.
+    Syntax:
+
+    function functionName(parameters) {
+        // Code to execute
+    }
+
+2. Higher-Order Functions
+
+    Definition:
+        Functions that take other functions as arguments or return them as results.
+    Use Cases:
+        Creating flexible and reusable code.
+        Commonly used with array methods like map(), filter(), and reduce().
+    Example:
+
+    const higherOrder = (callback, num) => callback(num);
+    const square = x => x * x;
+    console.log(higherOrder(square, 5)); // Output: 25
+
+3. Primitive Functions
+
+    Definition:
+        Standard functions that are not dependent on other functions and perform specific tasks.
+    Example:
+
+    function greet(name) {
+        return `Hello, ${name}!`;
+    }
+    console.log(greet('John')); // Output: Hello, John!
+
+4. Callback Functions
+
+    Definition:
+        A function passed as an argument to another function, executed later within the containing function.
+    Types of Callbacks:
+        Synchronous Callback: Executed immediately during the function call.
+
+[1, 2, 3].forEach(num => console.log(num));
+
+Asynchronous Callback: Executed later, often used in operations like API calls or event handling.
+
+        setTimeout(() => console.log('This is a delayed message'), 1000);
+
+    Use Cases:
+        Event handling.
+        Working with asynchronous operations such as network requests or timers.
+
+Resources:
+
+    JavaScript Functions :https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions
+    Higher-Order Functions in JavaScript
+    JavaScript Callback Functions
+
+Today’s session provided an in-depth understanding of functions and their applications in JavaScript, with a focus on higher-order and callback functions. Practical examples demonstrated their importance in writing clean, efficient, and modular code.
