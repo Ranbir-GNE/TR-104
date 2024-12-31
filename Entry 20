@@ -1,0 +1,140 @@
+1. Dynamically Typed
+
+    Definition:
+    JavaScript is a dynamically typed language, meaning you don’t need to specify the data type of a variable when declaring it. The data type is determined at runtime based on the value assigned.
+
+    Example:
+
+    let x = 42;     // x is a number
+    x = "Hello";    // x is now a string
+
+2. Interpreter for Line-by-Line Execution
+
+    How It Works:
+    JavaScript is an interpreted language, which means the code is executed line by line by the JavaScript engine (e.g., V8 in Chrome). The interpreter parses and executes the code directly without converting it into machine code first, allowing for faster development and debugging.
+
+    Key Points:
+        JavaScript code is read, parsed, and executed in a sequential manner.
+        The code is executed by an interpreter, which differs from a compiled language where the entire program is translated into machine code before running.
+
+File System (fs) in Node.js
+
+    Overview:
+    The fs module in Node.js allows for interacting with the file system (reading, writing, updating, and deleting files).
+
+    Common Methods:
+
+        fs.readFile():
+        Reads the contents of a file asynchronously.
+
+fs.readFile('file.txt', 'utf8', (err, data) => {
+  if (err) throw err;
+  console.log(data);
+});
+
+fs.writeFile():
+Writes data to a file asynchronously, creating the file if it does not exist.
+
+fs.writeFile('file.txt', 'Hello World!', (err) => {
+  if (err) throw err;
+  console.log('File saved!');
+});
+
+fs.copyFile():
+Copies a file from one location to another.
+
+fs.copyFile('source.txt', 'destination.txt', (err) => {
+  if (err) throw err;
+  console.log('File copied!');
+});
+
+fs.rename():
+Renames or moves a file.
+
+fs.rename('old.txt', 'new.txt', (err) => {
+  if (err) throw err;
+  console.log('File renamed!');
+});
+
+fs.unlink():
+Deletes a file.
+
+fs.unlink('file.txt', (err) => {
+  if (err) throw err;
+  console.log('File deleted!');
+});
+
+fs.mkdir():
+Creates a new directory.
+
+fs.mkdir('newDir', (err) => {
+  if (err) throw err;
+  console.log('Directory created!');
+});
+
+fs.rm():
+Deletes a directory or file. It can also delete directories recursively.
+
+fs.rm('oldDir', { recursive: true }, (err) => {
+  if (err) throw err;
+  console.log('Directory deleted!');
+});
+
+fs.appendFile():
+Appends data to a file, creating the file if it does not exist.
+
+        fs.appendFile('file.txt', 'Appending text!', (err) => {
+          if (err) throw err;
+          console.log('Text appended!');
+        });
+
+rm vs unlink
+
+    unlink:
+    Deletes a single file. It is specifically used to remove files and does not support directory removal.
+    Example:
+
+fs.unlink('file.txt', (err) => {
+  if (err) throw err;
+  console.log('File deleted!');
+});
+
+rm:
+This is a more versatile method, introduced in Node.js 14. It can remove files or directories, and with the { recursive: true } option, it can delete directories and their contents.
+Example:
+
+    fs.rm('dir', { recursive: true }, (err) => {
+      if (err) throw err;
+      console.log('Directory and contents removed!');
+    });
+
+Sync vs Async Functions
+
+    Asynchronous Functions:
+    Asynchronous functions in Node.js allow non-blocking operations. The code can continue executing while waiting for I/O operations (like reading or writing files) to complete. They use callbacks, promises, or async/await.
+    Example:
+
+fs.readFile('file.txt', 'utf8', (err, data) => {
+  if (err) throw err;
+  console.log(data);
+});
+
+Synchronous Functions:
+Synchronous functions block the execution of the program until the operation completes. They are simpler to use but can slow down the application when performing I/O operations, as the execution will pause until the file operation finishes.
+Example:
+
+    const data = fs.readFileSync('file.txt', 'utf8');
+    console.log(data);
+
+Learning Outcomes
+
+    Gained an understanding of JavaScript being a dynamically typed, interpreted language.
+    Learned about the fs module in Node.js for interacting with the file system, covering common methods like readFile, writeFile, unlink, mkdir, and more.
+    Differentiated between synchronous and asynchronous file operations, and understood the advantages of asynchronous methods for non-blocking execution.
+    Learned the distinction between rm and unlink methods in Node.js for deleting files and directories.
+
+Resources
+
+    Node.js File System Documentation: https://nodejs.org/api/fs.html
+    MDN Web Docs: JavaScript Types: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures
+    Node.js Event Loop and Asynchronous Programming: https://nodejs.org/en/learn/asynchronous-work/event-loop-timers-and-nexttick
