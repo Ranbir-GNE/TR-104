@@ -1,0 +1,119 @@
+Topic Covered: useEffect Hook in React
+1. Definition of useEffect Hook
+
+    The useEffect hook is a React Hook that lets you perform side effects in functional components.
+    Side Effects Examples:
+        Fetching data from APIs.
+        Setting up subscriptions.
+        Manually manipulating the DOM.
+
+2. Key Uses of useEffect
+
+    Performing Side Effects: E.g., fetching data when the component loads.
+    Updating External Systems: Syncing a component's state with local storage or external services.
+    Cleaning Up Resources: Removing event listeners, unsubscribing from streams, or clearing timers when the component unmounts.
+
+3. Cautions with useEffect
+
+    Infinite Loops:
+        If dependencies are not managed correctly, it can cause infinite re-renders.
+    Overuse of useEffect:
+        Avoid using it for logic that could be handled directly inside the render function or event handlers.
+    Dependency Array:
+        Be cautious about what is included in the dependency array to prevent unintended behavior.
+
+4. Syntax of useEffect
+
+useEffect(() => {
+  // Side effect code
+  return () => {
+    // Cleanup code
+  };
+}, [dependencies]);
+
+Explanation:
+
+    First Parameter: A function where you define the side effect.
+    Second Parameter (dependencies array): Controls when the side effect runs.
+
+5. Behavior Based on the Dependency Array
+
+    Empty Dependency Array ([]):
+        Effect runs once after the initial render (similar to componentDidMount in class components).
+
+useEffect(() => {
+  console.log('Runs only once on mount');
+}, []);
+
+No Dependency Array:
+
+    Effect runs after every render (similar to componentDidUpdate).
+
+useEffect(() => {
+  console.log('Runs after every render');
+});
+
+With Dependencies ([dependentFunction]):
+
+    Effect runs only when the listed dependencies change.
+
+    const [count, setCount] = useState(0);
+
+    useEffect(() => {
+      console.log(`Count is ${count}`);
+    }, [count]); // Runs when 'count' changes
+
+6. Cleanup Function in useEffect
+
+    Used to clean up side effects like subscriptions or event listeners when the component unmounts or before re-running the effect.
+    Example:
+
+    useEffect(() => {
+      const interval = setInterval(() => {
+        console.log('Interval running');
+      }, 1000);
+
+      return () => {
+        clearInterval(interval); // Cleanup
+      };
+    }, []);
+
+7. Effect of Dependency Array States
+
+    [] (Empty Array): Effect runs once on mount. No further execution unless the component unmounts or remounts.
+    No Array Provided: Effect executes after every render and update.
+    [dependencies] (Specific Dependencies): Runs only when the specified dependencies change, making it efficient and predictable.
+
+Example Scenarios:
+
+    Fetching Data on Component Mount:
+
+useEffect(() => {
+  fetch('https://api.example.com/data')
+    .then(response => response.json())
+    .then(data => console.log(data));
+}, []); // Runs only once
+
+Sync State with Local Storage:
+
+useEffect(() => {
+  localStorage.setItem('count', count);
+}, [count]); // Runs when 'count' changes
+
+Cleaning Up Event Listeners:
+
+    useEffect(() => {
+      const handleResize = () => console.log(window.innerWidth);
+      window.addEventListener('resize', handleResize);
+
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      }; // Cleanup on unmount
+    }, []);
+
+Resources:
+
+    React Docs: useEffect : https://react.dev/reference/react/useEffect
+    Understanding useEffect
+
+This session provided a comprehensive understanding of the useEffect hook, including its syntax, use cases, and potential pitfalls to avoid. The explanation of dependency arrays clarified how to control when effects run for optimized and predictable behavior in React applications.
