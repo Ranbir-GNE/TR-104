@@ -1,0 +1,160 @@
+Topics Covered
+1. Tailwind CSS
+
+    Definition:
+    Tailwind CSS is a utility-first CSS framework that provides pre-defined classes for building responsive and modern web designs. Instead of writing custom CSS, developers use Tailwind's utility classes directly in HTML to style components.
+
+    Advantages:
+        Rapid Development:
+            Speeds up styling with pre-built utility classes.
+        Customizable:
+            Allows easy customization using a tailwind.config.js file.
+        Responsive Design:
+            Built-in support for responsive design using classes like sm:, md:, lg:, etc.
+        Small CSS Bundle Size:
+            Uses a tree-shaking technique to remove unused styles, reducing file size.
+        Consistency:
+            Ensures design consistency across the application.
+        No Context Switching:
+            Avoids switching between HTML and CSS files since styles are written directly in HTML.
+
+Setting Up Tailwind CSS in a Vite Project
+
+    Install Vite:
+
+npm create vite@latest my-project --template react
+cd my-project
+npm install
+
+Install Tailwind CSS:
+
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init
+
+Configure Tailwind:
+Add the paths to your template files in tailwind.config.js:
+
+module.exports = {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
+
+Add Tailwind Directives to index.css:
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+Start the Development Server:
+
+    npm run dev
+
+Task: Build a Todo App
+
+Features:
+
+    Add a new Todo using an input box.
+    Edit an existing Todo.
+    Delete a Todo.
+
+Code Implementation
+
+Todo App UI and Logic:
+
+import React, { useState } from "react";
+
+const TodoApp = () => {
+  const [todos, setTodos] = useState([]);
+  const [input, setInput] = useState("");
+  const [editIndex, setEditIndex] = useState(null);
+
+  // Add Todo
+  const addTodo = () => {
+    if (input.trim() === "") return;
+    if (editIndex !== null) {
+      const updatedTodos = todos.map((todo, index) =>
+        index === editIndex ? input : todo
+      );
+      setTodos(updatedTodos);
+      setEditIndex(null);
+    } else {
+      setTodos([...todos, input]);
+    }
+    setInput("");
+  };
+
+  // Edit Todo
+  const editTodo = (index) => {
+    setInput(todos[index]);
+    setEditIndex(index);
+  };
+
+  // Delete Todo
+  const deleteTodo = (index) => {
+    setTodos(todos.filter((_, i) => i !== index));
+  };
+
+  return (
+    <div className="flex flex-col items-center p-6 space-y-4">
+      <h1 className="text-2xl font-bold">Todo App</h1>
+      <div className="flex space-x-2">
+        <input
+          type="text"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="Enter a todo"
+          className="border border-gray-300 p-2 rounded w-64"
+        />
+        <button
+          onClick={addTodo}
+          className="bg-blue-500 text-white px-4 py-2 rounded"
+        >
+          {editIndex !== null ? "Update" : "Add"}
+        </button>
+      </div>
+      <ul className="w-64 space-y-2">
+        {todos.map((todo, index) => (
+          <li
+            key={index}
+            className="flex justify-between items-center border p-2 rounded"
+          >
+            <span>{todo}</span>
+            <div className="space-x-2">
+              <button
+                onClick={() => editTodo(index)}
+                className="text-green-500"
+              >
+                Edit
+              </button>
+              <button
+                onClick={() => deleteTodo(index)}
+                className="text-red-500"
+              >
+                Delete
+              </button>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default TodoApp;
+
+Learning Outcomes
+
+    Understood the advantages of Tailwind CSS for rapid and consistent styling.
+    Learned how to set up Tailwind CSS in a Vite React project.
+    Implemented a functional Todo App with features like Add, Edit, and Delete, using useState for state management.
+
+Resources:
+
+    Tailwind CSS Documentation: https://tailwindcss.com/docs/installation
+    React useState Hook: https://react.dev/reference/react/useState
