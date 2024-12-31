@@ -1,0 +1,119 @@
+Topic: Authorization and Authentication
+1. Understanding Authorization and Authentication
+
+    Authentication:
+        Definition: The process of verifying a user's identity.
+        Example Use Cases:
+            Login systems (e.g., username and password).
+            Verifying credentials for API access.
+
+    Authorization:
+        Definition: The process of determining if a user has permission to perform a specific action or access a specific resource.
+        Example Use Cases:
+            Restricting admin-only features.
+            Controlling access to sensitive data.
+
+Difference:
+
+    Authentication ensures "Who are you?"
+    Authorization ensures "What are you allowed to do?"
+
+2. Token-Based Authentication
+
+    What is a Token?
+    A token is a small piece of data issued by the server upon successful login that acts as proof of authentication.
+
+    How It Works:
+        User logs in with valid credentials.
+        Server generates a token and sends it to the client.
+        Client stores the token (e.g., in localStorage or sessionStorage).
+        The client includes the token in subsequent API requests for validation.
+
+    Advantages:
+        Stateless (server does not need to remember user sessions).
+        Scalable for distributed systems.
+
+3. Cache-Based Authentication
+
+    What is Cache-Based Authentication?
+    Uses temporary storage, like memory cache or browser storage, to store user session data.
+
+    How It Works:
+        Authentication details are cached for quick access.
+        Suitable for short-term session management (e.g., single-page apps).
+
+    Advantages:
+        Fast and efficient for frequently accessed data.
+        Reduces server load for validation.
+
+    Disadvantages:
+        Less secure if cache data is not properly protected.
+
+4. Storage Options for Tokens
+
+    Local Storage:
+        Persistent storage in the browser.
+        Use Cases: Remember user login between sessions.
+        Caution: Vulnerable to XSS (Cross-Site Scripting) attacks.
+
+    Session Storage:
+        Stores data for the duration of the session (cleared on browser close).
+        Use Cases: Temporary user authentication.
+
+    HTTP-Only Cookies:
+        Secure storage for tokens with built-in protection against XSS.
+        Use Cases: Highly secure applications.
+
+5. Working with Tokens
+
+Setting a Token:
+
+const setToken = (token) => {
+  localStorage.setItem("authToken", token);
+};
+
+Getting a Token:
+
+const getToken = () => {
+  return localStorage.getItem("authToken");
+};
+
+Token Expiry Management:
+
+    Tokens typically include an expiration time (e.g., in a JWT exp field).
+    The client can check the expiry time before sending the token in a request.
+
+Example of Token Decoding (Using JWT):
+
+import jwtDecode from "jwt-decode";
+
+const isTokenValid = () => {
+  const token = getToken();
+  if (!token) return false;
+
+  const decoded = jwtDecode(token);
+  const currentTime = Date.now() / 1000; // Convert to seconds
+  return decoded.exp > currentTime;
+};
+
+6. Best Practices
+
+    Use HTTPS to secure token transmission.
+    Store sensitive tokens in HTTP-only cookies when possible.
+    Implement token expiration and automatic refresh mechanisms.
+    Secure your application against XSS and CSRF attacks.
+    Use short-lived tokens to minimize the risk of misuse.
+
+Learning Outcomes
+
+    Learned the differences between authentication and authorization and their use cases.
+    Understood token-based and cache-based authentication mechanisms.
+    Explored methods for storing tokens (localStorage, sessionStorage, cookies) and their pros/cons.
+    Implemented basic token handling functions like setToken and getToken.
+    Learned the importance of token expiry and how to validate it programmatically.
+
+Resources
+
+    JWT (JSON Web Tokens) Official Documentation: https://jwt.io/introduction
+    Local Storage vs. Session Storage: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
+    Best Practices for Authentication Tokens: https://curity.medium.com/best-practices-for-storing-access-tokens-in-the-browser-6b3d515d9814
