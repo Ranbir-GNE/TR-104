@@ -1,0 +1,149 @@
+Topic: Routing in React
+1. What is Routing?
+
+Routing refers to navigating between different views or pages of a web application. It allows users to move across the application without reloading the page, maintaining a seamless experience.
+2. How Does Routing Work?
+
+Routing works by managing the browser's URL and rendering components based on the current URL. In Single Page Applications (SPAs) like those built with React, routing is achieved using libraries such as React Router.
+3. Uses of Routing
+
+    Navigating between pages (e.g., Home, About, Contact).
+    Passing data through URLs (e.g., dynamic route parameters).
+    Creating nested views or layouts (e.g., a dashboard with subroutes).
+    Managing application state based on the route (e.g., fetching data based on the current route).
+
+React Router Basics
+
+React Router is a popular library for implementing routing in React applications.
+Key Components and Concepts
+
+    BrowserRouter:
+        The top-level component that enables routing functionality.
+        Wraps the entire application and provides the routing context.
+        Must be included in your app to use React Router.
+
+    import { BrowserRouter } from "react-router-dom";
+
+    const App = () => (
+      <BrowserRouter>
+        <Routes>
+          {/* Define your routes here */}
+        </Routes>
+      </BrowserRouter>
+    );
+
+    Routes and Route:
+        Routes is a container for all the routes in the application.
+        Route defines a specific path and the component to render when that path is accessed.
+
+    import { Routes, Route } from "react-router-dom";
+
+    const App = () => (
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
+      </BrowserRouter>
+    );
+
+    Link:
+        Used for navigation within the app without reloading the page.
+        Works like an HTML <a> tag but prevents a full page reload.
+
+    import { Link } from "react-router-dom";
+
+    const Navbar = () => (
+      <nav>
+        <Link to="/">Home</Link>
+        <Link to="/about">About</Link>
+      </nav>
+    );
+
+    Dynamic Routing with Parameters:
+        Allows routes to accept dynamic data via parameters.
+        Parameters can be accessed using the useParams hook.
+
+    import { useParams } from "react-router-dom";
+
+    const Profile = () => {
+      const { username } = useParams();
+      return <h1>Welcome, {username}!</h1>;
+    };
+
+    const App = () => (
+      <Routes>
+        <Route path="/profile/:username" element={<Profile />} />
+      </Routes>
+    );
+
+    Nested Routes:
+        Enables defining child routes within a parent route.
+        Useful for layouts like dashboards or menus.
+
+    const Dashboard = () => (
+      <div>
+        <h1>Dashboard</h1>
+        <Outlet />
+      </div>
+    );
+
+    const App = () => (
+      <Routes>
+        <Route path="/dashboard" element={<Dashboard />}>
+          <Route path="profile" element={<Profile />} />
+          <Route path="settings" element={<Settings />} />
+        </Route>
+      </Routes>
+    );
+
+        <Outlet>: Used to render the child routes inside the parent component.
+
+Example: Basic Routing App
+
+App Structure:
+
+    Home Page
+    About Page
+    Profile Page with Dynamic Parameter
+
+import React from "react";
+import { BrowserRouter, Routes, Route, Link, useParams } from "react-router-dom";
+
+const Home = () => <h1>Home Page</h1>;
+const About = () => <h1>About Page</h1>;
+
+const Profile = () => {
+  const { username } = useParams();
+  return <h1>Welcome, {username}!</h1>;
+};
+
+const App = () => (
+  <BrowserRouter>
+    <nav>
+      <Link to="/">Home</Link>
+      <Link to="/about">About</Link>
+      <Link to="/profile/JohnDoe">Profile</Link>
+    </nav>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/profile/:username" element={<Profile />} />
+    </Routes>
+  </BrowserRouter>
+);
+
+export default App;
+
+Learning Outcomes
+
+    Understood the concept and importance of routing in SPAs.
+    Learned to implement routing using BrowserRouter, Routes, and Route.
+    Gained knowledge of navigation using the Link component.
+    Explored dynamic routes and how to use parameters with useParams.
+    Built nested routes for complex layouts with Outlet.
+
+Resources
+
+    React Router Documentation: https://reactrouter.com/home
+    React useParams Hook: https://api.reactrouter.com/v7/functions/react_router.useParams.html
