@@ -1,0 +1,155 @@
+Topic: Props and Context in React
+1. Props in React
+
+    What are Props?
+    Props (short for "properties") are a way to pass data from a parent component to a child component in React.
+
+    How to Pass Props?
+
+    const Parent = () => {
+      const message = "Hello from Parent!";
+      return <Child greeting={message} />;
+    };
+
+    const Child = ({ greeting }) => {
+      return <h1>{greeting}</h1>;
+    };
+
+    Use Cases of Props:
+        Passing data (e.g., strings, numbers, objects, arrays) between components.
+        Configuring child components (e.g., passing styles or event handlers).
+
+2. Issues with Props (Prop Drilling)
+
+    Definition:
+    Prop drilling occurs when props are passed through multiple levels of components, even if only the lowest-level component needs the data.
+
+    Example of Prop Drilling:
+
+    const App = () => {
+      const user = "John Doe";
+      return <Parent user={user} />;
+    };
+
+    const Parent = ({ user }) => {
+      return <Child user={user} />;
+    };
+
+    const Child = ({ user }) => {
+      return <h1>Hello, {user}!</h1>;
+    };
+
+    Problems:
+        Makes code less readable and harder to maintain.
+        Components that don't need the data still receive it, creating unnecessary dependencies.
+
+3. Using useContext Hook to Avoid Prop Drilling
+
+    How is useContext Better?
+    The useContext hook allows sharing data directly with deeply nested components without passing it through each level explicitly.
+
+    Key Elements of Context API:
+        createContext: Creates a context for holding shared data.
+        Provider: Wraps components to supply the context value.
+        useContext: Consumes the context value in any component.
+
+4. Steps to Use Context API with useContext Hook
+
+1. Create a Context:
+
+import React, { createContext } from "react";
+
+// Create a context
+const UserContext = createContext();
+export default UserContext;
+
+2. Wrap Components with Provider:
+
+import UserContext from "./UserContext";
+
+const App = () => {
+  const user = "John Doe";
+
+  return (
+    <UserContext.Provider value={user}>
+      <Parent />
+    </UserContext.Provider>
+  );
+};
+
+3. Consume Context with useContext:
+
+import React, { useContext } from "react";
+import UserContext from "./UserContext";
+
+const Child = () => {
+  const user = useContext(UserContext);
+
+  return <h1>Hello, {user}!</h1>;
+};
+
+5. Example Use Case: Theme Toggle
+
+Context Setup for Theme:
+
+// ThemeContext.js
+import React, { createContext, useState } from "react";
+
+export const ThemeContext = createContext();
+
+export const ThemeProvider = ({ children }) => {
+  const [theme, setTheme] = useState("light");
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+  };
+
+  return (
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+};
+
+Using the Context in Components:
+
+import React, { useContext } from "react";
+import { ThemeContext } from "./ThemeContext";
+
+const ThemeSwitcher = () => {
+  const { theme, toggleTheme } = useContext(ThemeContext);
+
+  return (
+    <div className={theme}>
+      <p>Current Theme: {theme}</p>
+      <button onClick={toggleTheme}>Toggle Theme</button>
+    </div>
+  );
+};
+
+Wrapping the App:
+
+import React from "react";
+import { ThemeProvider } from "./ThemeContext";
+import ThemeSwitcher from "./ThemeSwitcher";
+
+const App = () => {
+  return (
+    <ThemeProvider>
+      <ThemeSwitcher />
+    </ThemeProvider>
+  );
+};
+
+Learning Outcomes
+
+    Learned how to pass props between components and their use cases.
+    Understood the challenges of prop drilling and how it can make code cumbersome.
+    Learned how the useContext hook and Context API simplify state and data management by avoiding prop drilling.
+    Implemented a Theme Toggle feature using createContext, Provider, and useContext.
+
+Resources:
+
+    React Props Documentation: https://react.dev/learn/passing-props-to-a-component
+    React Context API Documentation
+    useContext Hook Reference: https://react.dev/reference/react/useContext
