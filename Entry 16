@@ -1,0 +1,119 @@
+Task: Image Slider Using useEffect and setInterval
+1. Task Description
+
+The objective is to create an image slider (slideshow) that cycles through a list of images automatically using the useEffect hook and setInterval function. Additionally, we analyzed why the slider stops at the last image and implemented a fix to make it infinite.
+2. Implementation
+Code for Image Slider
+
+import { useEffect, useState } from "react";
+
+const Product = () => {
+  const imageData = [
+    {
+      url: "https://signal.avg.com/hubfs/Blog_Content/Avg/Signal/AVG%20Signal%20Images/The%20Ultimate%20GTA%205%20Guide%20to%20Boosting%20Your%20Graphics%20and%20FPS/The_Ultimate_GTA_V_Performance_Guide-Thumb.jpg",
+    },
+    {
+      url: "https://assets-prd.ignimgs.com/2022/09/23/top25modernpcgames-blogroll-1663951042311.jpg",
+    },
+    {
+      url: "https://thumbs.dreamstime.com/b/football-soccer-ball-kickoff-game-sunset-38302251.jpg",
+    },
+    { url: "https://images3.alphacoders.com/235/235059.png" },
+    {
+      url: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Altja_j%C3%B5gi_Lahemaal.jpg/800px-Altja_j%C3%B5gi_Lahemaal.jpg",
+    },
+  ];
+
+  const [imageIndex, setImageIndex] = useState(0);
+
+  const handleNext = () => {
+    // if(imageIndex===imageData.length-1){
+    //     return setImageIndex(0);
+    // }
+    setImageIndex((prev) => (prev === imageData.length - 1 ? 0 : prev + 1)); //setImageIndex((prev)=>prev+1)
+  };
+
+  const handlePrev = () => {
+    setImageIndex(
+      setImageIndex((prev) => (prev === 0 ? imageData.length - 1 : prev - 1))
+    );
+  };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      handleNext();
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
+  console.log("re-render");
+  return (
+    <div className="flex justify-center pt-16">
+      <img
+        src="https://www.svgrepo.com/show/70596/left-arrow.svg"
+        alt="arrow"
+        className="w-60 cursor-pointer"
+        onClick={handlePrev}
+      />
+      <div>
+        <img
+          src={imageData[imageIndex].url}
+          alt="img"
+          className="w-[800px] h-[500px]"
+        />{" "}
+      </div>
+      <img
+        src="https://www.svgrepo.com/show/70596/left-arrow.svg"
+        alt="arrow"
+        className="w-60 rotate-180 cursor-pointer"
+        onClick={handleNext}
+      />
+    </div>
+  );
+};
+
+export default Product;
+
+3. Key Concepts
+
+    useEffect Hook:
+        Used to set up the interval for changing slides.
+        Cleaned up with clearInterval to avoid memory leaks when the component unmounts.
+
+    setInterval Function:
+        Executes a callback function (setCurrentIndex) at a specified interval.
+
+    Modulo Operator (%):
+        Ensures the slideshow loops back to the first image after reaching the last.
+        currentIndex + 1 % images.length resets the index to 0 when it exceeds the last index.
+
+4. Why the Slideshow Stops at the End Index
+
+    If we don't use the modulo operation, the setCurrentIndex will keep incrementing beyond the last index.
+    Since there is no image at that index, the slideshow appears to stop.
+
+Example of the Issue Without Modulo:
+
+setCurrentIndex((prevIndex) => prevIndex + 1); // Stops after the last image
+
+5. How to Make the Slideshow Infinite
+
+    Solution: Use the modulo operator to reset the index:
+
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+
+Learning Outcomes
+
+    Gained an understanding of useEffect for managing side effects like intervals.
+    Learned how to use setInterval to execute a function repeatedly.
+    Identified why the slider stops at the last image and how to prevent this by looping back using the modulo operator.
+    Practiced cleaning up intervals to avoid memory leaks.
+
+Resources
+
+    React useEffect Hook Documentation
+    MDN Web Docs: setInterval: https://developer.mozilla.org/en-US/docs/Web/API/Window/setInterval
+    How Modulo Works: https://developer.mozilla.org/en-US/docs/Web/API/Window/setInterval
