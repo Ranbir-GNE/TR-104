@@ -36,37 +36,39 @@ Blocking vs Non-Blocking Operations
         console.log("This executes before file reading is complete.");
 
     Use Cases:
-        Ideal for I/O operations (reading files, making API calls, database operations).
+        I/O operations (reading files, making API calls, database operations).
         Essential for servers to handle multiple clients concurrently.
 
-    Advantages:
+        Advantages:
         Improves scalability.
         Reduces idle waiting during I/O operations.
 
-3. Key Differences
-Aspect	Blocking	Non-Blocking
-Execution	Sequential	Concurrent
-Resource Utilization	Less efficient	More efficient
-Complexity	Simpler	Requires callbacks, promises, or async/await
-Example	readFileSync	readFile
-Use Cases	Small scripts or CPU-bound tasks	High-performance servers, I/O-bound tasks
-Blocking and Non-Blocking in Servers
-Server Operations
+        | Aspect               | Blocking       | Non-Blocking                         |
+        |----------------------|----------------|--------------------------------------|
+        | Execution            | Sequential     | Concurrent                           |
+        | Resource Utilization | Less efficient | More efficient                       |
+        | Complexity           | Simpler        | Requires callbacks, promises, or async/await |
+        | Example              | readFileSync   | readFile                             |
+        | Use Cases            | Small scripts or CPU-bound tasks | High-performance servers, I/O-bound tasks |
 
-    Blocking Server:
-        A single-threaded server where a blocking operation will halt the execution of all requests until it finishes.
-        Example: Traditional PHP servers.
+        ### Blocking and Non-Blocking in Servers
 
-    Non-Blocking Server:
-        Handles multiple requests concurrently by utilizing event-driven architecture.
-        Example: Node.js, which uses the event loop and callback queue.
+        #### Server Operations
 
-How Non-Blocking Enhances Server Performance
+        **Blocking Server:**
+        - A single-threaded server where a blocking operation will halt the execution of all requests until it finishes.
+        - Example: Traditional PHP servers.
 
-    A blocking server can process only one request at a time, causing other clients to wait.
-    A non-blocking server processes I/O tasks in the background, allowing the CPU to handle multiple clients simultaneously.
+        **Non-Blocking Server:**
+        - Handles multiple requests concurrently by utilizing event-driven architecture.
+        - Example: Node.js, which uses the event loop and callback queue.
 
-Code Example: Non-Blocking Server in Node.js
+        ### How Non-Blocking Enhances Server Performance
+
+        - A blocking server can process only one request at a time, causing other clients to wait.
+        - A non-blocking server processes I/O tasks in the background, allowing the CPU to handle multiple clients simultaneously.
+
+        ### Code Example: Non-Blocking Server in Node.js
 
 const http = require('http');
 
@@ -95,6 +97,6 @@ Learning Outcomes
 
 Resources
 
-    MDN Web Docs: Blocking and Non-Blocking: https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server-side/Node_server_without_framework
+    MDN Web Docs: Blocking and Non-Blocking
     Understanding Node.js Event Loop
     Non-Blocking vs Blocking Explained
