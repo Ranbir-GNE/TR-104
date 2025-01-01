@@ -1,0 +1,115 @@
+Understanding Axios
+1. What is Axios?
+
+    Axios: A popular promise-based HTTP client for making network requests in JavaScript.
+    Key Features:
+        Works on both client-side (browsers) and server-side (Node.js).
+        Supports Promise and async/await syntax for better readability.
+        Automatically transforms JSON data.
+        Supports request and response interception.
+        Handles timeout and error handling elegantly.
+
+2. How to Use Axios?
+
+Installation:
+
+npm install axios
+
+Making a GET Request:
+
+const axios = require('axios');
+
+axios.get('https://api.example.com/data')
+  .then((response) => {
+    console.log(response.data);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+
+Making a POST Request:
+
+axios.post('https://api.example.com/data', {
+  name: 'John Doe',
+  email: 'john.doe@example.com',
+})
+  .then((response) => {
+    console.log(response.data);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+
+Using async/await:
+
+const fetchData = async () => {
+  try {
+    const response = await axios.get('https://api.example.com/data');
+    console.log(response.data);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+fetchData();
+
+3. Why Use Axios?
+
+    Simplified Syntax: Shorter, cleaner code compared to native fetch().
+    Interceptors: Modify requests or responses globally.
+    Automatic Transformations: Converts data formats automatically (e.g., JSON).
+    Error Handling: Provides robust error messages with HTTP status codes.
+    Cross-Site Requests: Handles cross-origin requests and credentials effortlessly.
+
+4. Axios Interceptors
+
+What are Interceptors?
+
+    Interceptors allow you to run custom logic before a request is sent or after a response is received.
+    Useful for:
+        Adding authentication tokens to headers.
+        Logging or modifying requests/responses globally.
+        Handling errors consistently across an app.
+
+Request Interceptor Example:
+
+axios.interceptors.request.use(
+  (config) => {
+    // Modify request config, e.g., add token to headers
+    config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
+    console.log('Request sent:', config);
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+Response Interceptor Example:
+
+axios.interceptors.response.use(
+  (response) => {
+    // Process the response data
+    console.log('Response received:', response);
+    return response;
+  },
+  (error) => {
+    // Handle errors globally
+    if (error.response && error.response.status === 401) {
+      console.error('Unauthorized, redirecting to login...');
+    }
+    return Promise.reject(error);
+  }
+);
+
+Learning Outcomes
+
+    Learned the core functionality of Axios and why it is preferred over fetch().
+    Explored how to make GET and POST requests with error handling using Axios.
+    Understood the use of Axios interceptors for modifying and monitoring requests/responses.
+
+Resources
+
+    Axios GitHub Repository: https://github.com/axios/axios
+    Axios Documentation
+    Using Axios with Interceptors: https://axios-http.com/docs/interceptors
