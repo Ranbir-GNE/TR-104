@@ -1,0 +1,130 @@
+Express Basics: Understanding Key Concepts and Methods
+1. HTTP Methods in Express
+
+    GET: Used to retrieve data from the server.
+
+app.get('/api/data', (req, res) => {
+  res.send('GET request received');
+});
+
+POST: Used to send data to the server.
+
+app.post('/api/data', (req, res) => {
+  res.send('POST request received');
+});
+
+PUT: Used to update existing data.
+
+app.put('/api/data/:id', (req, res) => {
+  res.send(`PUT request received for ID: ${req.params.id}`);
+});
+
+DELETE: Used to delete data from the server.
+
+    app.delete('/api/data/:id', (req, res) => {
+      res.send(`DELETE request received for ID: ${req.params.id}`);
+    });
+
+2. Understanding Request Properties
+
+    req.params: Used to capture route parameters.
+
+app.get('/user/:id', (req, res) => {
+  const userId = req.params.id;
+  res.send(`User ID: ${userId}`);
+});
+
+req.query: Used to capture query string parameters.
+
+app.get('/search', (req, res) => {
+  const { keyword, page } = req.query;
+  res.send(`Search for: ${keyword}, Page: ${page}`);
+});
+
+req.body: Used to capture the body of a POST/PUT request (requires middleware like express.json).
+
+    app.use(express.json());
+
+    app.post('/login', (req, res) => {
+      const { username, password } = req.body;
+      res.send(`Logged in with username: ${username}`);
+    });
+
+3. Response Methods
+
+    res.send: Sends a response back to the client.
+
+res.send('Hello, World!');
+
+res.json: Sends a JSON response.
+
+    res.json({ message: 'Success', data: [] });
+
+4. Middleware and app.use
+
+    app.use: Attaches middleware to the application.
+
+    app.use((req, res, next) => {
+      console.log('Middleware executed');
+      next(); // Pass control to the next middleware or route handler
+    });
+
+5. Handling Errors with app.next
+
+    app.next(): Passes control to the next middleware or error handler.
+
+    app.use((req, res, next) => {
+      const error = new Error('Something went wrong!');
+      next(error); // Passes error to the error-handling middleware
+    });
+
+    app.use((err, req, res, next) => {
+      res.status(500).send(err.message);
+    });
+
+6. Starting the Server with app.listen
+
+    app.listen: Starts the Express server on a specified port.
+
+    const PORT = 3000;
+    app.listen(PORT, () => {
+      console.log(`Server running on http://localhost:${PORT}`);
+    });
+
+7. Parsing Data with Body Parser
+
+    Body Parser: Middleware to parse incoming request bodies.
+        JSON Parsing:
+
+app.use(express.json());
+
+URL-Encoded Parsing:
+
+        app.use(express.urlencoded({ extended: true }));
+
+8. Handling FormData
+
+    To handle file uploads and form data, use the multer package.
+
+npm install multer
+
+    const multer = require('multer');
+    const upload = multer({ dest: 'uploads/' });
+
+    app.post('/upload', upload.single('file'), (req, res) => {
+      res.send(`File uploaded: ${req.file.originalname}`);
+    });
+
+Learning Outcomes
+
+    Gained a solid understanding of HTTP methods and how to use them in Express.
+    Learned how to handle route parameters, query parameters, and request bodies.
+    Explored middleware usage and how next() is used for error handling and chaining.
+    Understood response methods (res.send, res.json) and their applications.
+    Learned how to handle FormData using multer for file uploads.
+
+Resources
+
+    Express.js Documentation: https://expressjs.com/en/guide/routing.html
+    Handling FormData with Multer
+    Body Parser in Express
