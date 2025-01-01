@@ -1,0 +1,96 @@
+Introduction to MVC Architecture
+1. Overview of MVC Architecture
+
+    MVC: Stands for Model-View-Controller, a design pattern commonly used in software development to organize code.
+    Purpose: Separation of concerns, making code modular, maintainable, and scalable.
+    Components:
+        Model: Represents the data and business logic.
+        View: Displays the data to the user.
+        Controller: Handles user input and updates the Model or View.
+
+2. Components in Detail
+
+a. Model
+
+    Role:
+        Interacts with the database or data source.
+        Implements business logic.
+    Example:
+
+    const mongoose = require('mongoose');
+
+    const userSchema = new mongoose.Schema({
+      name: { type: String, required: true },
+      email: { type: String, unique: true },
+    });
+
+    const User = mongoose.model('User', userSchema);
+    module.exports = User;
+
+b. View
+
+    Role:
+        Presents data to the user.
+        Can use technologies like HTML, CSS, and templating engines (e.g., EJS, Handlebars).
+    Example:
+
+    <h1>Welcome, <%= user.name %></h1>
+
+c. Controller
+
+    Role:
+        Acts as an intermediary between the Model and View.
+        Processes user input and updates data or the UI.
+    Example:
+
+    const User = require('./models/User');
+
+    const getUser = async (req, res) => {
+      try {
+        const user = await User.findById(req.params.id);
+        res.render('userProfile', { user });
+      } catch (err) {
+        res.status(500).send('Error fetching user');
+      }
+    };
+    module.exports = { getUser };
+
+d. Routes
+
+    Role: Define URL endpoints and map them to specific controllers.
+    Example:
+
+    const express = require('express');
+    const { getUser } = require('./controllers/userController');
+
+    const router = express.Router();
+    router.get('/user/:id', getUser);
+
+    module.exports = router;
+
+3. Working of MVC
+
+    User Interaction: The user interacts with the View (UI).
+    Controller: Processes user input and interacts with the Model.
+    Model: Fetches or updates data and sends it back to the Controller.
+    View: Updates the UI based on the data received from the Controller.
+
+4. Advantages of MVC
+
+    Separation of Concerns: Clear division between data (Model), logic (Controller), and UI (View).
+    Maintainability: Modular structure makes debugging and updates easier.
+    Reusability: Components can be reused across different parts of the application.
+    Scalability: Allows easy addition of new features or updates.
+    Team Collaboration: Developers can work on different components independently.
+
+Learning Outcomes
+
+    Understood the components of MVC architecture and their roles.
+    Learned how MVC ensures code modularity and maintainability.
+    Practiced creating Models, Views, Controllers, and Routes in a sample application.
+
+Resources
+
+    MVC Architecture Overview: https://developer.mozilla.org/en-US/docs/Glossary/MVC
+    Express Routing: 
+    Mongoose Models and Schemas
