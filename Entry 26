@@ -1,0 +1,94 @@
+Introduction to Mongoose and MongoDB
+1. MongoDB Basics
+
+    NoSQL Database: MongoDB is a NoSQL database that stores data in a flexible, JSON-like format.
+    Hierarchy:
+        Document: Individual record stored in BSON format.
+        Collection: Group of documents, similar to tables in SQL.
+        Database: Contains multiple collections.
+        Cluster: A group of servers hosting the MongoDB database.
+
+2. Mongoose Overview
+
+    Mongoose: A Node.js library for MongoDB that provides schema-based solutions to model application data.
+    Why Use Mongoose:
+        Easy schema definition.
+        Data validation and type casting.
+        Middleware support for pre/post operations.
+
+3. Setting Up MongoDB
+
+    Cluster Creation: Set up a cluster in MongoDB Atlas.
+    User Setup: Create a user with specific roles and permissions.
+    IP Whitelisting: Add 0.0.0.0/0 to allow connections from all IPs.
+
+4. Connecting to MongoDB via URI
+
+    Connection URI Format:
+
+mongodb+srv://<username>:<password>@cluster0.mongodb.net/<databaseName>?retryWrites=true&w=majority
+
+Code Example:
+
+    const mongoose = require('mongoose');
+
+    mongoose.connect('your-connection-uri', {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
+      .then(() => console.log('Connected to MongoDB'))
+      .catch((err) => console.error('Connection failed:', err));
+
+5. Mongoose Basics
+
+    Schema Definition: Blueprint of how data will be structured in MongoDB.
+
+const userSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  age: { type: Number, min: 0 },
+  email: { type: String, unique: true },
+});
+
+Creating a Model: Interface to interact with the database.
+
+    const User = mongoose.model('User', userSchema);
+
+6. Basic CRUD Operations in Mongoose
+
+    Create (Insert):
+
+const newUser = new User({ name: 'John Doe', age: 25, email: 'john.doe@example.com' });
+newUser.save()
+  .then((result) => console.log(result))
+  .catch((error) => console.error(error));
+
+Read (Find):
+
+User.find({ age: { $gte: 18 } })
+  .then((users) => console.log(users))
+  .catch((error) => console.error(error));
+
+Update:
+
+User.updateOne({ name: 'John Doe' }, { age: 26 })
+  .then((result) => console.log(result))
+  .catch((error) => console.error(error));
+
+Delete:
+
+    User.deleteOne({ name: 'John Doe' })
+      .then((result) => console.log(result))
+      .catch((error) => console.error(error));
+
+Learning Outcomes
+
+    Learned the basics of MongoDB’s document-based structure and its hierarchy.
+    Understood the purpose and features of Mongoose for schema management.
+    Practiced setting up a MongoDB cluster and connecting using a URI.
+    Performed basic CRUD operations using Mongoose.
+
+Resources
+
+    MongoDB Atlas Documentation: https://www.mongodb.com/docs/atlas/
+    Mongoose Documentation: https://mongoosejs.com/docs/guide.html
+    CRUD Operations in MongoDB: https://www.mongodb.com/docs/manual/crud/
