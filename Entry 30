@@ -1,0 +1,65 @@
+Understanding Caching
+1. What is Caching?
+
+    Definition: Caching is the process of storing copies of data temporarily in a high-speed storage layer (cache) to reduce latency and improve performance for frequently accessed data.
+    Purpose: Improves application speed, reduces server load, and enhances user experience by serving data faster.
+
+2. How Does Caching Work?
+
+    Request Flow Without Cache:
+        Client makes a request → Server processes the request → Data fetched from the database → Response sent to the client.
+
+    Request Flow With Cache:
+        Client makes a request → Cache is checked for data:
+            If cache hit: Serve data from the cache.
+            If cache miss: Fetch data from the server, store it in the cache, and serve it to the client.
+
+3. Types of Caching
+
+    Browser Cache:
+        Stores static assets (e.g., images, CSS, JavaScript) locally in the user’s browser to reduce load time.
+
+    Server-Side Cache:
+        Stores frequently requested data on the server to reduce the time spent querying the database.
+
+    Database Cache:
+        Saves query results to avoid repetitive computations. Tools like Redis or Memcached are commonly used.
+
+    Application Cache:
+        Stores data at the application level for rapid retrieval during runtime.
+
+4. Why Use Caching?
+
+    Speed: Reduces latency by serving data faster.
+    Efficiency: Minimizes redundant computations and database queries.
+    Scalability: Reduces load on the backend server and database, enabling the system to handle more requests.
+    Cost Savings: Decreases server usage and network bandwidth costs.
+
+5. Advantages of Caching
+
+    Performance Boost: Significantly improves application response times.
+    Reduced Server Load: Offloads repeated requests to the cache instead of hitting the server or database.
+    User Experience: Faster data retrieval enhances user satisfaction.
+    Scalability: Makes it easier to scale applications under heavy loads.
+
+6. Disadvantages of Caching
+
+    Data Staleness: Cached data may become outdated, leading to inconsistencies.
+    Memory Consumption: Storing large datasets in the cache can consume significant memory.
+    Cache Miss Penalty: If data isn’t in the cache, additional time is spent fetching it from the database.
+    Complexity: Implementing and managing caching strategies adds development and maintenance overhead.
+    Cache Invalidation: Ensuring cached data stays synchronized with the source data can be challenging.
+
+Learning Outcomes
+
+    Learned the definition and purpose of caching in software development.
+    Understood the various types of caching, including browser, server-side, and database caching.
+    Identified the advantages and potential drawbacks of caching mechanisms.
+
+Resources
+
+    What is Caching? :https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching
+    Redis Official Documentation: https://redis.io/docs/latest/
+    Caching Strategies for Modern Applications: https://medium.com/@mmoshikoo/cache-strategies-996e91c80303
+
+
