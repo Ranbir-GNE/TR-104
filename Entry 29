@@ -1,0 +1,78 @@
+Understanding RESTful APIs
+1. What is a RESTful API?
+
+    Full Form: Representational State Transfer Application Programming Interface.
+    Definition: RESTful APIs are web services that follow the REST architectural style, providing standards for building scalable and lightweight web services.
+
+2. Key Principles of RESTful APIs
+
+    Statelessness:
+        Each request from the client contains all the information needed for the server to process it.
+        The server does not store client session data between requests.
+
+    Uniform Interface:
+        Uses consistent and standardized HTTP methods (GET, POST, PUT, DELETE, etc.).
+        Resources are identified by URIs (e.g., /users, /products/123).
+
+    Client-Server Architecture:
+        Separation of concerns between the client and server.
+        The client handles the user interface, while the server handles data processing and storage.
+
+    Cacheable Responses:
+        Responses can be cached by clients to improve performance.
+
+    Layered System:
+        Components are organized in layers (e.g., database, application server), promoting scalability and modularity.
+
+    Representation of Resources:
+        Resources are represented using formats like JSON, XML, or HTML.
+
+3. How RESTful APIs Work
+
+    Endpoint:
+        A URL that represents a resource (e.g., /api/users for user-related operations).
+
+    HTTP Methods:
+        GET: Retrieve data (e.g., fetch user details).
+        POST: Create new data (e.g., add a new user).
+        PUT: Update existing data (e.g., update user information).
+        DELETE: Remove data (e.g., delete a user).
+
+    Request and Response:
+        Request: Sent by the client with details of the operation (e.g., headers, parameters).
+        Response: Sent by the server, containing the result of the operation (e.g., status code, data).
+
+Example:
+
+    GET Request:
+
+GET /api/users/1 HTTP/1.1
+Host: example.com
+
+Response:
+
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "john.doe@example.com"
+    }
+
+4. Why Use RESTful APIs?
+
+    Scalability: RESTful APIs allow services to scale easily by separating client and server responsibilities.
+    Flexibility: They work across platforms and can handle multiple types of data (JSON, XML).
+    Stateless Nature: Simplifies server-side design as no session data is stored.
+    Standardized Communication: Use of standard HTTP methods ensures consistent communication between client and server.
+    Wide Adoption: RESTful APIs are widely supported by tools, libraries, and frameworks.
+
+Learning Outcomes
+
+    Understood the principles and architecture of RESTful APIs.
+    Learned how RESTful APIs operate using HTTP methods.
+    Recognized the advantages of using RESTful APIs for building scalable and flexible web services.
+
+Resources
+
+    REST API Principles: https://restfulapi.net/
+    RESTful API Tutorial: https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods
+    HTTP Methods Overview
